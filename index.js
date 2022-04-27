@@ -65,7 +65,7 @@ function renderTodoListList() {
               fetch(`http://localhost:3000/todos/${todo.id}`, {
                 method: "DELETE",
               });
-              list.remove()
+              li.remove()
             }
           }
           deleteTodo();
