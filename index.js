@@ -13,13 +13,12 @@ function renderTodoListList() {
         li.innerText = todo.title;
         if (todo.completed) {
           li.className = "completed";
-        }
+        } 
+        // else if (!todo.completed){
+        //   li.removeAttribute(complete);
+        // }
         list.append(li);
         // so if the todo is completed but is classed as completed, there should be a button that can modify its status
-        // if()
-        // const li = document.createElement('li')
-        // li.innerText = todo.completed
-        // ul.append(li)
 
         const completeButton = document.createElement("input");
         completeButton.setAttribute("type", "button");
@@ -33,40 +32,40 @@ function renderTodoListList() {
 
         completeButton.addEventListener("click", (completedEvent) => {
           completedEvent.preventDefault();
-          function updateStatus() {
-            console.log("here");
-            // not sure what to do the url
-            fetch(`http://localhost:3000/todos/${todo.id}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ completed: true }),
-            })
+            function updateStatus() {
+              console.log("here");
+              // not sure what to do the url
+              fetch(`http://localhost:3000/todos/${todo.id}`, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ completed: true }),
+              })
               .then((res) => res.json())
               .then((data) => {
                 console.log(data);
                 // get the current list item (li)
                 // set the attribute of the css class completed
                 if (todo.completed) {
-                    li.className = "complete";
+                  li.className = "complete";
                 }
               });
-          }
-          updateStatus();
+            }
+            updateStatus();
         });
 
         deleteButton.addEventListener("click", (deleteEvent) => {
-        //   deleteEvent.preventDefault();
+          // deleteEvent.preventDefault();
 
           function deleteTodo() {
-            if (todo.completed) {
+            // if (todo.completed) {
               //   delete by targeting the id
               fetch(`http://localhost:3000/todos/${todo.id}`, {
                 method: "DELETE",
               });
               li.remove()
-            }
+            // }
           }
           deleteTodo();
         });
